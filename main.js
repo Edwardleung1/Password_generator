@@ -1,3 +1,21 @@
+// Dom elements
+const resultEl = document.getElementById("result");
+const lengthEl = document.getElementById("length");
+const uppercaseEl = document.getElementById("uppercase");
+const lowercaseEl = document.getElementById("lowercase");
+const numbersEl = document.getElementById("numbers");
+const symbolsEl = document.getElementById("symbols");
+const generateEl = document.getElementById("generate");
+const clipboardEl = document.getElementById("clipboard");
+
+// Put all the functions in an object
+const randomFunc = {
+  lower: getRandomLower,
+  upper: getRandomUpper,
+  number: getRandomNumber,
+  symbol: getRandomSymbol,
+};
+
 // Generator functions - http://www.net-comber.com/charset.html
 
 function getRandomLower() {
