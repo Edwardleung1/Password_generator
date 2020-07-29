@@ -16,14 +16,72 @@ const randomFunc = {
   symbol: getRandomSymbol,
 };
 
-// Generate password click event, GET VALUES
+// Generate password click event, GETTING VALUES
 generateEl.addEventListener("click", () => {
   const length = +lengthEl.value;
   const hasLower = lowercaseEl.checked;
   const hasUpper = uppercaseEl.checked;
   const hasNumber = numbersEl.checked;
   const hasSymbol = symbolsEl.checked;
+
+  // Need to create function below
+  resultEl.innerText = generatePassword(
+    hasLower,
+    hasUpper,
+    hasNumber,
+    hasSymbol,
+    length
+  );
 });
+
+// Copy password to clipboard
+clipboardEl.addEventListener("click", () => {
+  const textarea = document.createElement("textarea");
+  const password = resultEl.innerText;
+
+  if (!password) {
+    return;
+  }
+
+  textarea.value = password;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+  alert("Password copied to clipboard");
+});
+
+// Generate password function
+function generatePassword(lower, upper, number, symbol, length) {
+  // 1. Init password variable
+  // 2. Filter out unchecked types
+  // 3. Loop over length and call a generate function for each type
+  // 4. Add final password to the password variable and return it
+
+  let generatedPassword = "";
+
+  const typesCount = lower + upper + number + symbol; // Counting the number of checked val
+
+  const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(
+    (item) => Object.values(item)[0]
+  );
+
+  if (typesCount === 0) {
+    return "";
+  }
+
+  for (let i = 0; i < length; i += typesCount) {
+    typesArr.forEach((type) => {
+      const funcName = Object.keys(type)[0];
+
+      generatedPassword += randomFunc[funcName]();
+    });
+  }
+
+  const finalPassword = generatedPassword.slice(0, length);
+
+  return finalPassword;
+}
 
 // Generator functions - http://www.net-comber.com/charset.html
 function getRandomLower() {
