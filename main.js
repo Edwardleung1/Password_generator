@@ -1,4 +1,4 @@
-// Dom elements
+// DOM elements
 const resultEl = document.getElementById("result");
 const lengthEl = document.getElementById("length");
 const uppercaseEl = document.getElementById("uppercase");
@@ -16,8 +16,16 @@ const randomFunc = {
   symbol: getRandomSymbol,
 };
 
-// Generator functions - http://www.net-comber.com/charset.html
+// Generate password click event, GET VALUES
+generateEl.addEventListener("click", () => {
+  const length = +lengthEl.value;
+  const hasLower = lowercaseEl.checked;
+  const hasUpper = uppercaseEl.checked;
+  const hasNumber = numbersEl.checked;
+  const hasSymbol = symbolsEl.checked;
+});
 
+// Generator functions - http://www.net-comber.com/charset.html
 function getRandomLower() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
